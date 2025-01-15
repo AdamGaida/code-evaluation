@@ -6,3 +6,13 @@ services:
     image: ollama/ollama
     ports:
       - "11434:11434"
+  postgres-db:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: myapp
+    ports:
+      - "5432:5432"
+    restart: always

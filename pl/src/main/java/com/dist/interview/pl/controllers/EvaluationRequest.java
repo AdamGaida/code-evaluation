@@ -4,8 +4,22 @@ import lombok.Data;
 
 @Data
 public  class EvaluationRequest {
-    private Long useId;
     private String problem;
     private String code;
 
+    public String getProblem() {
+        return problem;
     }
+
+    public void setProblem(String problem) {
+        this.problem = problem;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+}

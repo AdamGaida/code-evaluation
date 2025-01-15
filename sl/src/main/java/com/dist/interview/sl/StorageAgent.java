@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class StorageAgent extends Agent {
 
     @Autowired
-    private EvaluationServiceInterface evaluationService;
+    private EvaluationService evaluationService;
 
     protected void setup() {
         addBehaviour(new StoreBehaviour());
@@ -20,10 +20,7 @@ public class StorageAgent extends Agent {
         public void action() {
             ACLMessage msg = receive();
             if (msg != null) {
-                String[] data = msg.getContent().split(";");
-                if (data.length == 3) {
-                    evaluationService.saveEvaluation(data[0]);
-                }
+                evaluationService.saveEvaluation(msg.getContent());
             } else {
                 block();
             }

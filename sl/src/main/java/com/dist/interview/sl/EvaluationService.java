@@ -14,7 +14,6 @@ import org.springframework.ai.ollama.api.OllamaOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 
 @Service
 public class EvaluationService implements EvaluationServiceInterface {
@@ -39,18 +38,19 @@ public class EvaluationService implements EvaluationServiceInterface {
     }
     @Override
     public void wakeUpAgent(String problem,String solution) throws StaleProxyException {
-        ArrayList<String> args = new ArrayList<>();
-        args.add(problem);
-        args.add(solution);
+        Object[] args = new Object[2];
+        args[0] = problem;
+        args[1] = solution;
         Runtime rt = Runtime.instance();
         Profile profile = new ProfileImpl();
         AgentContainer container = rt.createMainContainer(profile);
+        /*AgentController storageAgent = container.createNewAgent("StorageAgent", "com.dist.interview.sl.StorageAgent", null);*/
+        AgentController evaluationAgent = container.createNewAgent("EvaluationAgent", "com.dist.interview.sl.EvaluationAgent", args);
 
-        AgentController evaluationAgent = container.createNewAgent("EvaluationAgent", "com.dist.interview.sl.EvaluationAgent", new ArrayList[]{args});
-        AgentController storageAgent = container.createNewAgent("StorageAgent", "com.dist.interview.sl.StorageAgent", null);
 
+        /*storageAgent.start();*/
         evaluationAgent.start();
-        storageAgent.start();
+
     }
 
     @Override

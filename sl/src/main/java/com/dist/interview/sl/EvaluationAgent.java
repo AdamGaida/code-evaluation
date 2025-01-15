@@ -1,6 +1,4 @@
 package com.dist.interview.sl;
-
-import com.dist.interview.slapi.EvaluationServiceInterface;
 import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
@@ -8,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 public class EvaluationAgent extends Agent {
-
+    public static String score;
    @Autowired
-    private EvaluationServiceInterface evaluationService;
+    private EvaluationService evaluationService;
 
     protected void setup() {
         addBehaviour(new EvaluateBehaviour());
@@ -23,8 +21,8 @@ public class EvaluationAgent extends Agent {
             String solution = args[1].toString();
 
             String score = evaluationService.evaluateProblem(evaluationService.prompt(problem, solution));
-
-            sendMessageToStorageAgent(score);
+            EvaluationAgent.score=score;
+            /*sendMessageToStorageAgent(score);*/
         }
 
     }

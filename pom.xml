@@ -60,9 +60,10 @@
         </dependency>
         <dependency>
             <groupId>com.dist.interview</groupId>
-            <artifactId>dal</artifactId>
+            <artifactId>sl-api</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+
     </dependencies>
     <build>
         <plugins>
@@ -82,6 +83,12 @@
             </plugin>
         </plugins>
     </build>
-
+<distributionManagement>
+    <repository>
+        <id>jade</id>
+        <name>some name</name>
+        <url>https://maven.pkg.github.com/AdamGaida/code-evaluation</url>
+    </repository>
+</distributionManagement>
 
 </project>
